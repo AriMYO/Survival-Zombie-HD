@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI healthText;
     private int health = 100;
-    public int damage = 10;
+    public int damage = 30;
     void Start()
     {
         healthText.text = "Health: " + health;
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         healthText.text = "Health: " + health;
+
+        if (health <= 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
     }
 
     public void TakeDamage()

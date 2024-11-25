@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
     private float speed = 10f;
+    private float health = 100f;
     private Animator animator;
     private NavMeshAgent agent;
     public Transform player;
@@ -26,6 +27,17 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+            animator.Play("Zombie Death");
+            if (!IsDeadActive())
+            {
+                agent.isStopped = true;
+                Destroy(gameObject, 7f);
+            }
+
+            return;
+        }
 
         if (sphereCollider.bounds.Contains(player.position))
         {
@@ -78,4 +90,16 @@ public class Enemy : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Attack");
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            health -= 25f;
+        }
+    }
+
+    private bool IsDeadActive()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Death");
+    }
 }
