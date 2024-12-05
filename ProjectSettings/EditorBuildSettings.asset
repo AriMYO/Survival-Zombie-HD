@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/World1.unity
     guid: c0d944ca9defd20449bc336e50d75a08
   - enabled: 1
+    path: Assets/Scenes/Scene_cambio.unity
+    guid: 7bb277bc5e46ec54d9e1c1ecb8d86764
+  - enabled: 1
     path: Assets/Scenes/World2.unity
     guid: fb7d5e4ae4084414fa2f41e239d86b06
   m_configObjects: {}
